@@ -1,5 +1,6 @@
 const readline = require('readline');
 
+// all the questions
 const questions = [
   "What's your name? Nicknames are also acceptable :) ",
   "What's an activity you like doing? ",
@@ -10,6 +11,7 @@ const questions = [
   "What is your superpower? In a few words, tell us what you are amazing at! "
 ];
 
+// store all the answers
 let answers = [];
 
 const rl = readline.createInterface({
@@ -19,40 +21,22 @@ const rl = readline.createInterface({
 
 
 // recursive function
-const askQuestion = (questions, questionIndex) => {
+const askQuestions = (questions, questionIndex) => {
   rl.question(questions[questionIndex], (answer) => {
     answers.push(answer);
-    
+    console.log(`Your answer for question ${questionIndex}: ${answer}`);
     questionIndex++;
-    if (questionIndex === questions.length) {
+    if (questionIndex > questions.length - 1) {
       rl.close();
-      console.log(answers);
+      return console.log(`${answers[0]} likes ${answers[1]} while listening to ${answers[2]}. Their favorite meal is ${answers[3]}, especially if it's ${answers[4]}! To burn off some calories, they enjoy ${answers[5]}. If they keep it up, they'll keep getting better at ${answers[6]}!`);
     }
-    askQuestion(questions, questionIndex - 1);
+
+    askQuestions(questions, questionIndex);
   });
 };
 
 
-askQuestion(questions, 0);
-
-
-
-// rl.question(question, (answer) => {
-//   answers.push(answer);
-//   rl.close();
-// });
-
-
-
-// rl.question('Q1 ', (answer) => {
-//   console.log(`Thank you for your valuable feedback: ${answer}`);
-
-//   rl.question('Q2 ', (answer) => {
-//     console.log(`Thank you for your valuable feedback: ${answer}`);
-//     rl.close();
-//   });
-
-// });
+askQuestions(questions, 0);
 
 
 
